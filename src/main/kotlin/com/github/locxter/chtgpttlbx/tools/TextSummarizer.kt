@@ -104,14 +104,14 @@ class TextSummarizer : Tool() {
                             "Create a summary of the following text with the title \"${titleInput.text}\". Focus on the following aspects: ${keyAspectsInput.text}. Original text:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "${originalTextInput.text}\n" +
+                                    "${originalTextInput.text.substring(0, 12500)}\n" +
                                     "```"
                         }
                         EChatLanguage.CHAT_LANGUAGE_GERMAN -> {
                             "Erstelle eine Zusammenfassung des nachfolgenden Textes mit dem Titel \"${titleInput.text}\". Gehe besonders auf folgende Schwerpunkte ein: ${keyAspectsInput.text}. Originaler Text:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "${originalTextInput.text}\n" +
+                                    "${originalTextInput.text.substring(0, 12500)}\n" +
                                     "```"
                         }
                     }

@@ -16,6 +16,7 @@ dependencies {
     implementation("com.aallam.openai:openai-client:3.2.4")
     implementation("io.ktor:ktor-client-okhttp:2.3.1")
     implementation("org.slf4j:slf4j-nop:2.0.7")
+    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     testImplementation(kotlin("test"))
 }
 
