@@ -9,6 +9,7 @@ import com.github.locxter.chtgpttlbx.gui.*
 import com.github.locxter.chtgpttlbx.lib.OpenaiClient
 import com.github.locxter.chtgpttlbx.lib.SettingsController
 import com.github.locxter.chtgpttlbx.model.Chat
+import com.github.locxter.chtgpttlbx.model.EChatLanguage
 import com.github.locxter.chtgpttlbx.model.EColourTheme
 import com.github.locxter.chtgpttlbx.model.ETool
 import kotlinx.coroutines.runBlocking
@@ -73,7 +74,15 @@ fun main(args: Array<String>) {
     }
     restartChatButton.addActionListener {
         chat = tools[currentToolIndex].getInitialMessages()
+        chat.messages.add(ChatMessage(
+            ChatRole.Assistant,
+            when (settings.chatLanguage) {
+                EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your initial prompt, this might take a while..."
+                EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
+            }
+        ))
         chatView.chat = chat
+        chat.messages.removeLast()
         openaiClient.chat = chat
         SwingUtilities.invokeLater {
             runBlocking {
@@ -86,12 +95,20 @@ fun main(args: Array<String>) {
     sendButton.addActionListener {
         if (messageInput.text.isNotBlank() && chat.messages.last().role == ChatRole.Assistant) {
             chat.messages.add(ChatMessage(ChatRole.User, messageInput.text))
-            chatView.chat = chat
-            openaiClient.chat = chat
             messageInput.text = ""
+            chat.messages.add(ChatMessage(
+                ChatRole.Assistant,
+                when (settings.chatLanguage) {
+                    EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your subsequent prompt, this might take a while..."
+                    EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
+                }
+            ))
+            chatView.chat = chat
+            chat.messages.removeLast()
+            openaiClient.chat = chat
             SwingUtilities.invokeLater {
                 runBlocking {
-                    println(openaiClient.getAssistantResponse())
+                    println(openaiClient.getAssistantResponse() + "\n")
                 }
                 chat = openaiClient.chat
                 chatView.chat = chat
