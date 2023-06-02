@@ -95,7 +95,7 @@ class PresentationCreator : Tool() {
                                     "\n" +
                                     "<br><br>\n" +
                                     "\n" +
-                                    "**&rarr; Topic conclusion**\n" +
+                                    "**&rarr; Conclusion of the topic**\n" +
                                     "\n" +
                                     "---\n" +
                                     "\n" +
@@ -107,7 +107,7 @@ class PresentationCreator : Tool() {
                                     "\n" +
                                     "<br><br>\n" +
                                     "\n" +
-                                    "**&rarr; Topic conclusion**\n" +
+                                    "**&rarr; Conclusion of the topic**\n" +
                                     "\n" +
                                     "---\n" +
                                     "\n" +
