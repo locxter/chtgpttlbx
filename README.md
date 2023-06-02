@@ -41,3 +41,10 @@ Build the JAR via `gladle clean standalone` and then run it via `java -jar build
 ## How to a commit a tool
 
 This application was built with extensibility in mind, which makes adding new tools quite a breeze. Simply create a new class in `/tools` implementing the `Tool` abstract class and add a new entry to the `ETool` enum in `/model`. A good minimal example is the standard chat tool (`StandardChat`), but feel free to reach out, if you have questions or issues. Once the new tool is working and tested, open a merge request and it I will add it to the main project shortly.
+
+## How to build the native installers
+
+Most of the needed information can be found in this excellent [Baeldung article](https://www.baeldung.com/java14-jpackage), this [Nokoriware article](https://www.nokoriware.com/blog/2021/9/12/java-using-jpackage-quick-start-guide-for-windows) and on the [docs page of jpackage](https://docs.oracle.com/en/java/javase/17/jpackage/packaging-overview.html#GUID-C1027043-587D-418D-8188-EF8F44A4C06A), but here we go. If you are on Windows, you first have to install [Wix v3](https://wixtoolset.org/docs/wix3/). If you are on Ubuntu, make sure to have `fakeroot` installed. Then build the JAR as described under `How to use it`. Finally execute one of these commands depending on your plattform to build the installer:
+
+- Ubuntu: `jpackage --input build/ --name chtgpttlbx --main-jar libs/chtgpttlbx-1.0-standalone.jar --main-class com.github.locxter.chtgpttlbx.MainKt --type deb --linux-shortcut`
+- Windows: `& 'C:\Program Files\Java\jdk-17.0.2\bin\jpackage.exe' --input build/ --name chtgpttlbx --main-jar libs/chtgpttlbx-1.0-standalone.jar --main-class com.github.locxter.chtgpttlbx.MainKt --type exe --win-shortcut`
