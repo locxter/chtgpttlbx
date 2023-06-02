@@ -165,7 +165,7 @@ fun main(args: Array<String>) {
     constraints.gridwidth = 5
     panel.add(aboutLabel, constraints)
     // Create the main window
-    frame.size = Dimension(640, 640)
+    frame.size = Dimension(960, 960)
     frame.minimumSize = Dimension(640, 640)
     frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
     frame.add(panel)
