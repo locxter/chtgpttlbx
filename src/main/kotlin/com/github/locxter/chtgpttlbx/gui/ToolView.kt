@@ -8,6 +8,7 @@ import kotlin.math.min
 
 class ToolView() : JPanel() {
     private val cardLayout = CardLayout()
+    private var currentToolIndex = 0
     var tools: List<Tool> = listOf()
         set(value) {
             removeAll()
@@ -28,9 +29,14 @@ class ToolView() : JPanel() {
         this.tools = tools
     }
 
+    override fun validate() {
+        super.validate()
+        preferredSize = tools[currentToolIndex].preferredSize
+    }
+
     fun showTool(index: Int) {
-        val validIndex = min(max(index, 0), tools.lastIndex)
-        cardLayout.show(this, validIndex.toString())
-        preferredSize = tools[validIndex].preferredSize
+        currentToolIndex = min(max(index, 0), tools.lastIndex)
+        cardLayout.show(this, currentToolIndex.toString())
+        validate()
     }
 }
