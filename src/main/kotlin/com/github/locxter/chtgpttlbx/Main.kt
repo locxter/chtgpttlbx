@@ -23,7 +23,7 @@ import javax.swing.border.EmptyBorder
 
 @BetaOpenAI
 fun main(args: Array<String>) {
-    val settingsController = SettingsController(File("chtgpttlbx.properties"))
+    val settingsController = SettingsController(File(System.getProperty("user.home") + File.separator + ".chtgpttlbx.properties"))
     var settings = settingsController.readSettings()
     val openaiClient = OpenaiClient(settings.openaiKey)
     var chat = Chat()
