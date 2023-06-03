@@ -1,12 +1,20 @@
 package com.github.locxter.chtgpttlbx.gui
 
 import java.awt.Dimension
+import java.awt.FontMetrics
+import java.awt.Graphics2D
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
 import kotlin.math.max
+import kotlin.math.roundToInt
 
-class HeightLimitedTextArea(maxHeight: Int) : JScrollPane() {
+class HeightLimitedTextArea() : JScrollPane() {
     private val textArea = JTextArea()
+    var visibleLines: Int = 1
+        set(value) {
+            field = max(value, 1)
+            validate()
+        }
     var text: String = ""
         get() {
             return textArea.text
@@ -20,10 +28,19 @@ class HeightLimitedTextArea(maxHeight: Int) : JScrollPane() {
         // Configure the scroll pane
         setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER)
         setVerticalScrollBarPolicy(VERTICAL_SCROLLBAR_AS_NEEDED)
-        minimumSize = Dimension(0, max(maxHeight, 0))
-        preferredSize = Dimension(0, max(maxHeight, 0))
         textArea.lineWrap = true
         textArea.wrapStyleWord = true
         setViewportView(textArea)
+        validate()
+    }
+
+    constructor(visibleLines: Int) : this() {
+        this.visibleLines = visibleLines
+    }
+
+    override fun validate() {
+        super.validate()
+        minimumSize = Dimension(0, ((visibleLines + .5) * this.getFontMetrics(this.font).height).roundToInt())
+        preferredSize = Dimension(0, ((visibleLines+ .5) * this.getFontMetrics(this.font).height).roundToInt())
     }
 }

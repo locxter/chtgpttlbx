@@ -21,7 +21,7 @@ class TextSummarizer : Tool() {
     private val keyAspectsLabel = JLabel("Key aspects:")
     private val keyAspectsInput = JTextField()
     private val originalTextLabel = JLabel("Original text:")
-    private val originalTextInput = HeightLimitedTextArea(48)
+    private val originalTextInput = HeightLimitedTextArea(3)
 
     init {
         description.text =

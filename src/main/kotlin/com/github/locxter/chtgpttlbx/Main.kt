@@ -52,7 +52,7 @@ fun main(args: Array<String>) {
     val toolView = ToolView(tools)
     val restartChatButton = JButton("(Re-)Start chat")
     val chatView = ChatView()
-    val messageInput = HeightLimitedTextArea(48)
+    val messageInput = HeightLimitedTextArea(2)
     val sendButton = JButton("Send")
     val aboutLabel = JLabel("2023 locxter")
     // Add functions to the buttons
