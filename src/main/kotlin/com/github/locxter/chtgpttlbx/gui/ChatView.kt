@@ -3,9 +3,7 @@ package com.github.locxter.chtgpttlbx.gui
 import com.aallam.openai.api.BetaOpenAI
 import com.aallam.openai.api.chat.ChatRole
 import com.github.locxter.chtgpttlbx.model.Chat
-import java.awt.GridBagConstraints
-import java.awt.GridBagLayout
-import java.awt.Insets
+import java.awt.*
 import javax.swing.JPanel
 import javax.swing.JScrollPane
 import javax.swing.border.EmptyBorder
@@ -50,6 +48,7 @@ class ChatView : JScrollPane() {
 
     override fun validate() {
         super.validate()
+        panel.preferredSize = Dimension(preferredSize.width, panel.preferredSize.height)
         if (isOverflowing() && panel.componentCount == messageTextAreas.size + 1) {
             panel.remove(messageTextAreas.size)
         } else if (!isOverflowing() && panel.componentCount == messageTextAreas.size) {
