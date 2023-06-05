@@ -15,6 +15,7 @@ import java.awt.Insets
 import javax.swing.JLabel
 import javax.swing.JTextField
 import javax.swing.border.EmptyBorder
+import kotlin.math.min
 
 @BetaOpenAI
 class VideoSummarizer : Tool() {
@@ -78,7 +79,8 @@ class VideoSummarizer : Tool() {
                 println(result.getException())
             }
             is Result.Success -> {
-                transcript = response.body().asString("text/plain; charset=utf-8").replace(Regex("[\r\n]+"), "\n").substring(0, 12500)
+                transcript = response.body().asString("text/plain; charset=utf-8").replace(Regex("[\r\n]+"), "\n")
+                transcript = transcript.substring(0, min(transcript.length, 12500))
             }
         }
         return Chat(
