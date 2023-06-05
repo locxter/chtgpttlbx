@@ -8,7 +8,7 @@
 
 This is a GUI ChatGPT toolbox, which is meant to make performing the same operations over and over as simple as possible. It's feature set is currently quite limited, but can easily be expanded by third-party contributions through its easy to use programming interface - so feel free to make a merge request, if you are missing a tool.
 
-**Prebuilt installers for Windows (.exe) and Linux (.deb) can be found under `Releases`.**
+**Prebuilt installers for Windows (.exe) and Linux (.deb) can be found under [Releases](https://github.com/locxter/chtgpttlbx/releases).**
 
 ## Tools
 
