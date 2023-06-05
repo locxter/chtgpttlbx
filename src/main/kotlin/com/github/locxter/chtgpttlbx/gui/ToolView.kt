@@ -16,9 +16,7 @@ class ToolView() : JPanel() {
                 add(i.toString(), value[i])
             }
             field = value
-            if (field.isNotEmpty()) {
-                showTool(0)
-            }
+            showTool(0)
         }
 
     init {
@@ -35,8 +33,10 @@ class ToolView() : JPanel() {
     }
 
     fun showTool(index: Int) {
-        currentToolIndex = min(max(index, 0), tools.lastIndex)
-        cardLayout.show(this, currentToolIndex.toString())
-        validate()
+        if (tools.isNotEmpty()) {
+            currentToolIndex = min(max(index, 0), tools.lastIndex)
+            cardLayout.show(this, currentToolIndex.toString())
+            validate()
+        }
     }
 }

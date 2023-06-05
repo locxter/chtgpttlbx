@@ -37,7 +37,6 @@ class ChatView : JScrollPane() {
     private val constraints = GridBagConstraints()
     private val spacer = Spacer()
 
-
     init {
         // Configure the scroll pane
         setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER)
@@ -76,7 +75,6 @@ class ChatView : JScrollPane() {
         setViewportView(panel)
         validate()
     }
-
 
     private fun isOverflowing(): Boolean {
         if (viewport.view == null) return false
