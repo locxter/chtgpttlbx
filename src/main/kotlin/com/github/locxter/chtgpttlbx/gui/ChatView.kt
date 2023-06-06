@@ -48,7 +48,7 @@ class ChatView : JScrollPane() {
 
     override fun validate() {
         super.validate()
-        panel.preferredSize = Dimension(preferredSize.width, panel.preferredSize.height)
+        panel.preferredSize = Dimension(preferredSize.width, panel.minimumSize.height)
         if (isOverflowing() && panel.componentCount == messageTextAreas.size + 1) {
             panel.remove(messageTextAreas.size)
         } else if (!isOverflowing() && panel.componentCount == messageTextAreas.size) {
