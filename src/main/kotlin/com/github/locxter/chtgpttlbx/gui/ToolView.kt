@@ -29,6 +29,7 @@ class ToolView() : JPanel() {
 
     override fun validate() {
         super.validate()
+        minimumSize = tools[currentToolIndex].minimumSize
         preferredSize = tools[currentToolIndex].preferredSize
     }
 
