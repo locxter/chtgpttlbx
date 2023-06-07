@@ -8,7 +8,7 @@
 
 This is a GUI ChatGPT toolbox, which is meant to make performing the same operations over and over as simple as possible. It's feature set is currently quite limited, but can easily be expanded by third-party contributions through its easy to use programming interface - so feel free to make a merge request, if you are missing a tool.
 
-**Prebuilt installers for Windows (.exe) and Linux (.deb) can be found under [Releases](https://github.com/locxter/chtgpttlbx/releases).**
+**Prebuilt installers for Windows (.exe), Linux (.deb) and macOS (.dmg) can be found under [Releases](https://github.com/locxter/chtgpttlbx/releases).**
 
 ## Tools
 
@@ -50,6 +50,7 @@ Most of the needed information can be found in this excellent [Baeldung article]
 
 - Ubuntu: `jpackage --input build/ --name chtgpttlbx --main-jar libs/chtgpttlbx-1.0-standalone.jar --main-class com.github.locxter.chtgpttlbx.MainKt --type deb --linux-shortcut`
 - Windows: `jpackage --input build/ --name chtgpttlbx --main-jar libs/chtgpttlbx-1.0-standalone.jar --main-class com.github.locxter.chtgpttlbx.MainKt --type exe --win-shortcut` (If `jpackage` isn't found, replace it with `& 'C:\Program Files\Java\jdk-17.0.2\bin\jpackage.exe'`, where you insert your JDK version instead of `jdk-17.0.2`.)
+- macOS: `jpackage --input build/ --name chtgpttlbx --main-jar libs/chtgpttlbx-1.0-standalone.jar --main-class com.github.locxter.chtgpttlbx.MainKt --type dmg --mac-package-name chtgpttlbx`
 
 ## Credits
 
