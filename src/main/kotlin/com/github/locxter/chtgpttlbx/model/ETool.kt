@@ -11,4 +11,6 @@ enum class ETool(val displayName: String, val component: Tool) {
     TOOL_PRESENTATION_CREATOR("Presentation creator", PresentationCreator()),
     TOOL_TEXT_SUMMARIZER("Text summarizer", TextSummarizer()),
     TOOL_VIDEO_SUMMARIZER("Video summarizer", VideoSummarizer()),
+    TOOL_TEXT_ANALYZER("Text analyzer", TextAnalyzer()),
+    TOOL_VIDEO_ANALYZER("Video analyzer", VideoAnalyzer()),
 }

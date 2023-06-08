@@ -23,8 +23,12 @@ Thanks to the amazing Markdown slides provided by [CryptPad](https://cryptpad.fr
 You can also take a look at the PDF file `presentation.pdf`, but it sadly is in DIN A4 format.
 - Text summarizer: A text summarizer in Markdown syntax
 ![Text summarizer example](text-summarizer.png)
-- Video summarizer: This is a YouTube video summarizer in Markdown syntax based on getsubs.cc
+- Video summarizer: A YouTube video summarizer in Markdown syntax based on getsubs.cc
 ![Video summarizer example](video-summarizer.png)
+- Text analyzer: A text analyzer in Markdown syntax
+  ![Text analyzer example](text-analyzer.png)
+- Video analyzer: A YouTube video analyzer in Markdown syntax based on getsubs.cc
+  ![Video analyzer example](video-analyzer.png)
 - More to come...
 
 ## Dependencies
