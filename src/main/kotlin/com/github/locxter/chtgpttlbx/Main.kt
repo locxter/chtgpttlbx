@@ -93,25 +93,32 @@ fun main(args: Array<String>) {
         }
     }
     sendButton.addActionListener {
-        if (messageInput.text.isNotBlank() && chat.messages.last().role == ChatRole.Assistant) {
-            chat.messages.add(ChatMessage(ChatRole.User, messageInput.text))
-            messageInput.text = ""
-            chat.messages.add(ChatMessage(
-                ChatRole.Assistant,
-                when (settings.chatLanguage) {
-                    EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your subsequent prompt, this might take a while..."
-                    EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
-                }
-            ))
-            chatView.chat = chat
-            chat.messages.removeLast()
-            openaiClient.chat = chat
-            SwingUtilities.invokeLater {
-                runBlocking {
-                    println(openaiClient.getAssistantResponse() + "\n")
-                }
-                chat = openaiClient.chat
+        if (chat.messages.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                frame, "Please send the initial prompt via the \"(Re-)Start chat\" button.", "Chat",
+                JOptionPane.INFORMATION_MESSAGE
+            )
+        } else {
+            if (messageInput.text.isNotBlank() && chat.messages.last().role == ChatRole.Assistant) {
+                chat.messages.add(ChatMessage(ChatRole.User, messageInput.text))
+                messageInput.text = ""
+                chat.messages.add(ChatMessage(
+                    ChatRole.Assistant,
+                    when (settings.chatLanguage) {
+                        EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your subsequent prompt, this might take a while..."
+                        EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
+                    }
+                ))
                 chatView.chat = chat
+                chat.messages.removeLast()
+                openaiClient.chat = chat
+                SwingUtilities.invokeLater {
+                    runBlocking {
+                        println(openaiClient.getAssistantResponse() + "\n")
+                    }
+                    chat = openaiClient.chat
+                    chatView.chat = chat
+                }
             }
         }
     }
