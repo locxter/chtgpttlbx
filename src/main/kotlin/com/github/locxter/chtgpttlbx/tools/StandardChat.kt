@@ -3,6 +3,7 @@ package com.github.locxter.chtgpttlbx.tools
 import com.aallam.openai.api.BetaOpenAI
 import com.aallam.openai.api.chat.ChatMessage
 import com.aallam.openai.api.chat.ChatRole
+import com.github.locxter.chtgpttlbx.gui.HeightLimitedTextArea
 import com.github.locxter.chtgpttlbx.lib.Tool
 import com.github.locxter.chtgpttlbx.model.Chat
 import com.github.locxter.chtgpttlbx.model.EChatLanguage
@@ -16,7 +17,7 @@ import javax.swing.border.EmptyBorder
 @BetaOpenAI
 class StandardChat : Tool() {
     private val initialPromptLabel = JLabel("Initial prompt")
-    private val initialPromptInput = JTextField()
+    private val initialPromptInput = HeightLimitedTextArea(3)
 
     init {
         description.text = "This is the standard ChatGPT chat known from the website."
