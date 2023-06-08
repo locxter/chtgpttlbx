@@ -23,7 +23,7 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
     private val chatLanguageLabel = JLabel("Chat language:")
     private val chatLanguageInput = JComboBox(EChatLanguage.values().map { it.displayName }.toTypedArray())
     private val restartMessage = JLabel("Restart the application for the all changes to take effect.")
-    private val versionLabel = JLabel("v1.0")
+    private val versionLabel = JLabel("v1.1")
     private val backupButton = JButton("Backup")
     private val restoreButton = JButton("Restore")
     private val spacer = Spacer()

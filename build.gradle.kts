@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.github.locxter"
-version = "1.0"
+version = "1.1"
 description = "This is a GUI ChatGPT toolbox, which is meant to make performing the same operations over and over as simple as possible."
 
 repositories {
