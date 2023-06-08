@@ -42,7 +42,7 @@ I generally try to minimize dependencies, but I'm a one man crew and can therefo
 
 ## How to use it
 
-Build the JAR via `gladle clean standalone` and then run it via `java -jar build/libs/chtgpttlbx-1.0-standalone.jar`. You will also need to enter your own OpenAI key on first launch, in order to start a chat and make requests. If you don't already have one, you can get it from the [OpenAI developer platform](https://platform.openai.com/account/api-keys). Please keep in mind that the text and video summarizers are limited to 12.500 characters due to the context limitation of GPT-3.5-Turbo.
+Build the JAR via `gradle clean standalone` and then run it via `java -jar build/libs/chtgpttlbx-1.0-standalone.jar`. You will also need to enter your own OpenAI key on first launch, in order to start a chat and make requests. If you don't already have one, you can get it from the [OpenAI developer platform](https://platform.openai.com/account/api-keys). Please keep in mind that the text and video summarizers are limited to 12.500 characters due to the context limitation of GPT-3.5-Turbo.
 
 ## How to a commit a tool
 
