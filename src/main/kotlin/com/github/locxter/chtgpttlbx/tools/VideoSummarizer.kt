@@ -7,8 +7,10 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.extensions.authentication
 import com.github.kittinunf.result.Result
 import com.github.locxter.chtgpttlbx.lib.Tool
+import com.github.locxter.chtgpttlbx.lib.TranscriptClient
 import com.github.locxter.chtgpttlbx.model.Chat
 import com.github.locxter.chtgpttlbx.model.EChatLanguage
+import com.github.locxter.chtgpttlbx.model.VideoId
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
@@ -66,23 +68,8 @@ class VideoSummarizer : Tool() {
     }
 
     override fun getInitialMessages(): Chat {
-        val videoID = videoIdInput.text.substringAfter("watch?v=").substringAfter("youtu.be/")
-        var transcript = ""
-        val (request, response, result) = Fuel.get(
-            when(settings.chatLanguage) {
-                EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "https://getsubs.cc/get_y.php?i=$videoID&format=txt&hl=en&a=auto"
-                EChatLanguage.CHAT_LANGUAGE_GERMAN -> "https://getsubs.cc/get_y.php?i=$videoID&format=txt&hl=de&a=auto"
-            }
-        ).responseString()
-        when (result) {
-            is Result.Failure -> {
-                println(result.getException())
-            }
-            is Result.Success -> {
-                transcript = response.body().asString("text/plain; charset=utf-8").replace(Regex("[\r\n]+"), "\n")
-                transcript = transcript.substring(0, min(transcript.length, 12500))
-            }
-        }
+        val videoId = videoIdInput.text.substringAfter("watch?v=").substringAfter("youtu.be/")
+        val transcript = TranscriptClient.getTranscript(VideoId(videoId), settings.chatLanguage)
         return Chat(
             messages = mutableListOf(
                 ChatMessage(
@@ -124,14 +111,14 @@ class VideoSummarizer : Tool() {
                             "Create a summary of the following video transcript with the title \"${titleInput.text}\". Focus on the following aspects: ${keyAspectsInput.text}. Tanscript:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "$transcript\n" +
+                                    "${transcript.content.substring(0, min(transcript.content.length, 12500))}\n" +
                                     "```"
                         }
                         EChatLanguage.CHAT_LANGUAGE_GERMAN -> {
                             "Erstelle eine Zusammenfassung des nachfolgend Videotranskripts mit dem Titel \"${titleInput.text}\". Gehe besonders auf folgende Schwerpunkte ein: ${keyAspectsInput.text}. Transskript:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "$transcript\n" +
+                                    "${transcript.content.substring(0, min(transcript.content.length, 12500))}\n" +
                                     "```"
                         }
                     }
