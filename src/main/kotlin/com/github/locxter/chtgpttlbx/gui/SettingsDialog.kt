@@ -1,5 +1,6 @@
 package com.github.locxter.chtgpttlbx.gui
 
+import com.github.locxter.chtgpttlbx.lib.SettingsController
 import com.github.locxter.chtgpttlbx.model.EChatLanguage
 import com.github.locxter.chtgpttlbx.model.EColourTheme
 import com.github.locxter.chtgpttlbx.model.Settings
@@ -7,8 +8,10 @@ import java.awt.Dimension
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
+import java.io.File
 import javax.swing.*
 import javax.swing.border.EmptyBorder
+import javax.swing.filechooser.FileNameExtensionFilter
 
 class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
     private val panel = JPanel()
@@ -21,6 +24,8 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
     private val chatLanguageInput = JComboBox(EChatLanguage.values().map { it.displayName }.toTypedArray())
     private val restartMessage = JLabel("Restart the application for the all changes to take effect.")
     private val versionLabel = JLabel("v1.0")
+    private val backupButton = JButton("Backup")
+    private val restoreButton = JButton("Restore")
     private val spacer = Spacer()
     private val okButton = JButton("OK")
     private val cancelButton = JButton("Cancel")
@@ -42,6 +47,26 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
         cancelButton.addActionListener {
             dispose()
             status = JOptionPane.CANCEL_OPTION
+        }
+        backupButton.addActionListener {
+            val filter = FileNameExtensionFilter("Settings", "properties")
+            val fileChooser = JFileChooser()
+            fileChooser.fileFilter = filter
+            val option = fileChooser.showSaveDialog(SwingUtilities.getWindowAncestor(this) as JFrame)
+            if (option == JFileChooser.APPROVE_OPTION) {
+                val settingsController = SettingsController(fileChooser.selectedFile)
+                settingsController.writeSettings(settings)
+            }
+        }
+        restoreButton.addActionListener {
+            val filter = FileNameExtensionFilter("Settings", "properties")
+            val fileChooser = JFileChooser()
+            fileChooser.fileFilter = filter
+            val option = fileChooser.showOpenDialog(SwingUtilities.getWindowAncestor(this) as JFrame)
+            if (option == JFileChooser.APPROVE_OPTION) {
+                val settingsController = SettingsController(fileChooser.selectedFile)
+                settings = settingsController.readSettings()
+            }
         }
         // Create the panel
         panel.border = EmptyBorder(5, 5, 5, 5)
@@ -72,28 +97,34 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
         constraints.gridx = 1
         constraints.gridy = 2
         panel.add(chatLanguageInput, constraints)
-        constraints.fill = GridBagConstraints.RELATIVE
         constraints.gridx = 0
         constraints.gridy = 3
+        panel.add(backupButton, constraints)
+        constraints.gridx = 1
+        constraints.gridy = 3
+        panel.add(restoreButton, constraints)
+        constraints.fill = GridBagConstraints.RELATIVE
+        constraints.gridx = 0
+        constraints.gridy = 4
         constraints.gridwidth = 2
         panel.add(restartMessage, constraints)
         constraints.fill = GridBagConstraints.BOTH
         constraints.weighty = 1.0
         constraints.gridx = 0
-        constraints.gridy = 4
+        constraints.gridy = 5
         panel.add(spacer, constraints)
         constraints.fill = GridBagConstraints.RELATIVE
         constraints.weighty = 0.0
         constraints.gridx = 0
-        constraints.gridy = 5
+        constraints.gridy = 6
         panel.add(versionLabel, constraints)
         constraints.fill = GridBagConstraints.HORIZONTAL
         constraints.gridx = 0
-        constraints.gridy = 6
+        constraints.gridy = 7
         constraints.gridwidth = 1
         panel.add(okButton, constraints)
         constraints.gridx = 1
-        constraints.gridy = 6
+        constraints.gridy = 7
         panel.add(cancelButton, constraints)
         // Create the dialog window
         size = Dimension(640, 640)
