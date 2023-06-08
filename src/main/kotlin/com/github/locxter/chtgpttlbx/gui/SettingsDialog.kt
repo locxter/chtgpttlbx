@@ -20,6 +20,7 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
     private val chatLanguageLabel = JLabel("Chat language:")
     private val chatLanguageInput = JComboBox(EChatLanguage.values().map { it.displayName }.toTypedArray())
     private val restartMessage = JLabel("Restart the application for the all changes to take effect.")
+    private val versionLabel = JLabel("v1.0")
     private val spacer = Spacer()
     private val okButton = JButton("OK")
     private val cancelButton = JButton("Cancel")
@@ -81,14 +82,18 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
         constraints.gridx = 0
         constraints.gridy = 4
         panel.add(spacer, constraints)
-        constraints.fill = GridBagConstraints.HORIZONTAL
+        constraints.fill = GridBagConstraints.RELATIVE
         constraints.weighty = 0.0
         constraints.gridx = 0
         constraints.gridy = 5
+        panel.add(versionLabel, constraints)
+        constraints.fill = GridBagConstraints.HORIZONTAL
+        constraints.gridx = 0
+        constraints.gridy = 6
         constraints.gridwidth = 1
         panel.add(okButton, constraints)
         constraints.gridx = 1
-        constraints.gridy = 5
+        constraints.gridy = 6
         panel.add(cancelButton, constraints)
         // Create the dialog window
         size = Dimension(640, 640)
