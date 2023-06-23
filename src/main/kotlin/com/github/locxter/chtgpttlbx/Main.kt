@@ -45,9 +45,7 @@ fun main(args: Array<String>) {
     val panel = JPanel()
     val constraints = GridBagConstraints()
     val toolSelector = JComboBox(ETool.values().map { it.displayName }.toTypedArray())
-    val spacer1 = Spacer()
-    val spacer2 = Spacer()
-    val spacer3 = Spacer()
+    val spacer = Spacer()
     val settingsButton = JButton("Settings")
     val tools = ETool.values().map { it.component.settings = settings; it.component }
     val toolView = ToolView(tools)
@@ -137,15 +135,12 @@ fun main(args: Array<String>) {
     constraints.gridx = 0
     constraints.gridy = 0
     panel.add(toolSelector, constraints)
+    constraints.weightx = 3.0
     constraints.gridx = 1
     constraints.gridy = 0
-    panel.add(spacer1, constraints)
-    constraints.gridx = 2
-    constraints.gridy = 0
-    panel.add(spacer2, constraints)
-    constraints.gridx = 3
-    constraints.gridy = 0
-    panel.add(spacer3, constraints)
+    constraints.gridwidth = 3
+    panel.add(spacer, constraints)
+    constraints.weightx = 1.0
     constraints.gridx = 4
     constraints.gridy = 0
     panel.add(settingsButton, constraints)
