@@ -25,7 +25,7 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
     private val modelLabel = JLabel("Model:")
     private val modelInput = JComboBox(EModel.values().map { it.displayName }.toTypedArray())
     private val restartMessage = JLabel("Restart the application for the all changes to take effect.")
-    private val versionLabel = JLabel("v1.1")
+    private val versionLabel = JLabel("v1.2")
     private val backupButton = JButton("Backup")
     private val restoreButton = JButton("Restore")
     private val spacer = Spacer()
