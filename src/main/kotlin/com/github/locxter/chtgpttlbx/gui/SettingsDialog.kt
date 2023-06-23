@@ -83,6 +83,7 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
         constraints.fill = GridBagConstraints.HORIZONTAL
         constraints.gridx = 1
         constraints.gridy = 0
+        colourThemeInput.minimumSize = Dimension(0, colourThemeInput.minimumSize.height)
         panel.add(colourThemeInput, constraints)
         constraints.fill = GridBagConstraints.RELATIVE
         constraints.gridx = 0
@@ -91,6 +92,7 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
         constraints.fill = GridBagConstraints.HORIZONTAL
         constraints.gridx = 1
         constraints.gridy = 1
+        openaiKeyInput.minimumSize = Dimension(0, openaiKeyInput.minimumSize.height)
         panel.add(openaiKeyInput, constraints)
         constraints.fill = GridBagConstraints.RELATIVE
         constraints.gridx = 0
@@ -99,6 +101,7 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
         constraints.fill = GridBagConstraints.HORIZONTAL
         constraints.gridx = 1
         constraints.gridy = 2
+        chatLanguageInput.minimumSize = Dimension(0, chatLanguageInput.minimumSize.height)
         panel.add(chatLanguageInput, constraints)
         constraints.fill = GridBagConstraints.RELATIVE
         constraints.gridx = 0
@@ -107,6 +110,7 @@ class SettingsDialog(parent: JFrame) : JDialog(parent, "Settings", true) {
         constraints.fill = GridBagConstraints.HORIZONTAL
         constraints.gridx = 1
         constraints.gridy = 3
+        modelInput.minimumSize = Dimension(0, modelInput.minimumSize.height)
         panel.add(modelInput, constraints)
         constraints.gridx = 0
         constraints.gridy = 4
