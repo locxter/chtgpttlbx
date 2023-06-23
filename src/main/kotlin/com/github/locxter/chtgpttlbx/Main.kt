@@ -23,9 +23,10 @@ import javax.swing.border.EmptyBorder
 
 @BetaOpenAI
 fun main(args: Array<String>) {
-    val settingsController = SettingsController(File(System.getProperty("user.home") + File.separator + ".chtgpttlbx.properties"))
+    val settingsController =
+        SettingsController(File(System.getProperty("user.home") + File.separator + ".chtgpttlbx.properties"))
     var settings = settingsController.readSettings()
-    val openaiClient = OpenaiClient(settings.openaiKey)
+    val openaiClient = OpenaiClient(settings.openaiKey, settings.model.modelId)
     var chat = Chat()
     var currentToolIndex = 0
     // Set a pleasing LaF
@@ -66,6 +67,7 @@ fun main(args: Array<String>) {
         if (response == JOptionPane.OK_OPTION) {
             settings = settingsDialog.settings
             openaiClient.openaiKey = settings.openaiKey
+            openaiClient.modelId = settings.model.modelId
             for (tool in tools) {
                 tool.settings = settings
             }
@@ -74,13 +76,15 @@ fun main(args: Array<String>) {
     }
     restartChatButton.addActionListener {
         chat = tools[currentToolIndex].getInitialMessages()
-        chat.messages.add(ChatMessage(
-            ChatRole.Assistant,
-            when (settings.chatLanguage) {
-                EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your initial prompt, this might take a while..."
-                EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
-            }
-        ))
+        chat.messages.add(
+            ChatMessage(
+                ChatRole.Assistant,
+                when (settings.chatLanguage) {
+                    EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your initial prompt, this might take a while..."
+                    EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
+                }
+            )
+        )
         chatView.chat = chat
         chat.messages.removeLast()
         openaiClient.chat = chat
@@ -102,13 +106,15 @@ fun main(args: Array<String>) {
             if (messageInput.text.isNotBlank() && chat.messages.last().role == ChatRole.Assistant) {
                 chat.messages.add(ChatMessage(ChatRole.User, messageInput.text))
                 messageInput.text = ""
-                chat.messages.add(ChatMessage(
-                    ChatRole.Assistant,
-                    when (settings.chatLanguage) {
-                        EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your subsequent prompt, this might take a while..."
-                        EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
-                    }
-                ))
+                chat.messages.add(
+                    ChatMessage(
+                        ChatRole.Assistant,
+                        when (settings.chatLanguage) {
+                            EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "I'm processing your subsequent prompt, this might take a while..."
+                            EChatLanguage.CHAT_LANGUAGE_GERMAN -> "Ich bearbeite deine Anfrage, das kann eine Weile dauern..."
+                        }
+                    )
+                )
                 chatView.chat = chat
                 chat.messages.removeLast()
                 openaiClient.chat = chat

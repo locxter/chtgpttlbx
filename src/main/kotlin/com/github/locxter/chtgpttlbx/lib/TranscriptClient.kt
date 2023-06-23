@@ -8,10 +8,10 @@ import com.github.locxter.chtgpttlbx.model.VideoId
 
 class TranscriptClient {
     companion object {
-        fun getTranscript(videoId: VideoId, language: EChatLanguage) : Transcript {
+        fun getTranscript(videoId: VideoId, language: EChatLanguage): Transcript {
             val transcript = Transcript(videoId, language, "")
             val (request, response, result) = Fuel.get(
-                when(language) {
+                when (language) {
                     EChatLanguage.CHAT_LANGUAGE_ENGLISH -> "https://getsubs.cc/get_y.php?i=${videoId.id}&format=txt&hl=en&a=auto"
                     EChatLanguage.CHAT_LANGUAGE_GERMAN -> "https://getsubs.cc/get_y.php?i=${videoId.id}&format=txt&hl=de&a=auto"
                 }
@@ -22,7 +22,8 @@ class TranscriptClient {
                 }
 
                 is Result.Success -> {
-                    transcript.content = response.body().asString("text/plain; charset=utf-8").replace(Regex("[\r\n]+"), "\n")
+                    transcript.content =
+                        response.body().asString("text/plain; charset=utf-8").replace(Regex("[\r\n]+"), "\n")
                 }
             }
             return transcript

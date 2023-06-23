@@ -3,13 +3,11 @@ package com.github.locxter.chtgpttlbx.tools
 import com.aallam.openai.api.BetaOpenAI
 import com.aallam.openai.api.chat.ChatMessage
 import com.aallam.openai.api.chat.ChatRole
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.extensions.authentication
-import com.github.kittinunf.result.Result
 import com.github.locxter.chtgpttlbx.lib.Tool
 import com.github.locxter.chtgpttlbx.lib.TranscriptClient
 import com.github.locxter.chtgpttlbx.model.Chat
 import com.github.locxter.chtgpttlbx.model.EChatLanguage
+import com.github.locxter.chtgpttlbx.model.EModel
 import com.github.locxter.chtgpttlbx.model.VideoId
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -111,14 +109,15 @@ class VideoAnalyzer : Tool() {
                             "Create an analysis of the following video transcript with the title \"${titleInput.text}\". Focus on the following aspects: ${keyAspectsInput.text}. Tanscript:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "${transcript.content.substring(0, min(transcript.content.length, 12500))}\n" +
+                                    "${transcript.content.substring(0, min(transcript.content.length, settings.model.maxContext))}\n" +
                                     "```"
                         }
+
                         EChatLanguage.CHAT_LANGUAGE_GERMAN -> {
                             "Erstelle eine Analyse des nachfolgend Videotranskripts mit dem Titel \"${titleInput.text}\". Gehe besonders auf folgende Schwerpunkte ein: ${keyAspectsInput.text}. Transskript:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "${transcript.content.substring(0, min(transcript.content.length, 12500))}\n" +
+                                    "${transcript.content.substring(0, min(transcript.content.length, settings.model.maxContext))}\n" +
                                     "```"
                         }
                     }

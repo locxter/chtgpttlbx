@@ -1,8 +1,6 @@
 package com.github.locxter.chtgpttlbx.gui
 
 import java.awt.Dimension
-import java.awt.FontMetrics
-import java.awt.Graphics2D
 import javax.swing.JScrollPane
 import javax.swing.JTextArea
 import kotlin.math.max
@@ -41,6 +39,6 @@ class HeightLimitedTextArea() : JScrollPane() {
     override fun validate() {
         super.validate()
         minimumSize = Dimension(0, ((visibleLines + .5) * this.getFontMetrics(this.font).height).roundToInt())
-        preferredSize = Dimension(0, ((visibleLines+ .5) * this.getFontMetrics(this.font).height).roundToInt())
+        preferredSize = Dimension(0, ((visibleLines + .5) * this.getFontMetrics(this.font).height).roundToInt())
     }
 }

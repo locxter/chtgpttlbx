@@ -26,11 +26,17 @@ class OpenaiClient() {
             )
             field = value
         }
+    var modelId: ModelId = ModelId("gpt-3.5-turbo")
     private var openai: OpenAI? = null
     var chat: Chat = Chat()
 
     constructor(apiKey: String) : this() {
         this.openaiKey = apiKey
+    }
+
+    constructor(apiKey: String, model: ModelId) : this() {
+        this.openaiKey = apiKey
+        this.modelId = model
     }
 
     fun addSystemMessage(content: String) {
@@ -43,7 +49,7 @@ class OpenaiClient() {
 
     suspend fun getAssistantResponse(): String? {
         val chatCompletionRequest = ChatCompletionRequest(
-            model = ModelId("gpt-3.5-turbo"),
+            model = modelId,
             messages = chat.messages
         )
         if (openai == null) {

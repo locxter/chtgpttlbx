@@ -7,6 +7,7 @@ import com.github.locxter.chtgpttlbx.gui.HeightLimitedTextArea
 import com.github.locxter.chtgpttlbx.lib.Tool
 import com.github.locxter.chtgpttlbx.model.Chat
 import com.github.locxter.chtgpttlbx.model.EChatLanguage
+import com.github.locxter.chtgpttlbx.model.EModel
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
@@ -105,14 +106,15 @@ class TextSummarizer : Tool() {
                             "Create a summary of the following text with the title \"${titleInput.text}\". Focus on the following aspects: ${keyAspectsInput.text}. Original text:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "${originalTextInput.text.substring(0, min(originalTextInput.text.length, 12500))}\n" +
+                                    "${originalTextInput.text.substring(0, min(originalTextInput.text.length, settings.model.maxContext))}\n" +
                                     "```"
                         }
+
                         EChatLanguage.CHAT_LANGUAGE_GERMAN -> {
                             "Erstelle eine Zusammenfassung des nachfolgenden Textes mit dem Titel \"${titleInput.text}\". Gehe besonders auf folgende Schwerpunkte ein: ${keyAspectsInput.text}. Originaler Text:\n" +
                                     "\n" +
                                     "```\n" +
-                                    "${originalTextInput.text.substring(0, min(originalTextInput.text.length, 12500))}\n" +
+                                    "${originalTextInput.text.substring(0, min(originalTextInput.text.length, settings.model.maxContext))}\n" +
                                     "```"
                         }
                     }
